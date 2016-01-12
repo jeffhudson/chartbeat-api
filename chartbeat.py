@@ -28,9 +28,25 @@ def getAPIkey():
 # read in list of sites
 def getSites():
     
-    f = open('sites.txt')
-    sites = json.load(f)
-    return sites
+    try:
+        f = open('sites.txt')
+        sites = json.load(f)
+        return sites
+    except Exception, e:
+        print "Error loading sites from local file called 'sites.txt'"
+        print "\tThere should be a local file in this directory called sites.txt "
+        print "\tWhich has contents like this:"
+        print """
+
+        {
+        "site1": "site1.com",
+        "MyEx": "myexamplesite.net",
+        "blog": "myawesomeblog.co.uk"
+        }
+
+        """
+
+        sys.exit("System error: " + str(e) );
         
 def createQuery(metrics_set, site, params):
     
